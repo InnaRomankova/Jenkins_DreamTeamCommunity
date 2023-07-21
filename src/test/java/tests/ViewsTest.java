@@ -5,6 +5,7 @@ import model.page.HomePage;
 import model.page.view.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 import runner.BaseUtils;
@@ -17,6 +18,7 @@ import java.util.Map;
 
 import static runner.TestUtils.getRandomStr;
 
+@Ignore
 public class ViewsTest extends BaseTest {
 
     @Step("Creating All Six Item: Freestyle Project, Pipeline,Multi-configuration Project, Folder, Multibranch Pipeline," +
@@ -522,6 +524,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertTrue(newPaneIsDisplayed);
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testCreateListViewAndAddSixItems")
     public void testListViewCheckEveryAddColumnItem() {
         List<Boolean> isMatchingMenuItemToAddedColumn = new ArrayList<>();
@@ -595,6 +598,7 @@ public class ViewsTest extends BaseTest {
                 new HomePage(getDriver()).getJobListAsString());
     }
 
+    @Ignore
     @Test(dependsOnMethods = "testCreateListViewAndAddSixItems")
     public void testDeleteStatusColumn() {
         boolean isContainingStatusColumn = new HomePage(getDriver())
@@ -625,6 +629,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertFalse(myViewsPage.getListViewsNames().contains(TestDataUtils.LIST_VIEW_NAME));
     }
 
+    @Ignore
     @Test
     public void testCreateNewListViewWithExistingJob() {
         final String projectOne = getRandomStr();

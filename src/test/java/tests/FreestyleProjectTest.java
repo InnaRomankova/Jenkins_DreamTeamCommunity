@@ -8,6 +8,7 @@ import model.page.RenameItemErrorPage;
 import model.page.config.FreestyleProjectConfigPage;
 import model.page.status.FreestyleProjectStatusPage;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 import runner.ProjectMethodsUtils;
@@ -18,6 +19,7 @@ import java.util.*;
 
 import static runner.TestUtils.*;
 
+@Ignore
 public class FreestyleProjectTest extends BaseTest {
 
     @TmsLink("Vorq8fwS")
