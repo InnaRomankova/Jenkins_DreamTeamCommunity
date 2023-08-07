@@ -1,6 +1,10 @@
 package runner;
 
 import io.qameta.allure.Allure;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -25,6 +29,10 @@ public abstract class BaseTest {
 
     private OrderUtils.MethodsOrder<Method> methodsOrder;
 
+    protected static Logger log = LogManager.getLogger();
+
+    private static final Marker SEPARATOR_MARKER = MarkerManager.getMarker("SEPARATOR");
+
     @BeforeClass
     protected void beforeClass() {
         methodsOrder = OrderUtils.createMethodsOrder(
@@ -37,7 +45,8 @@ public abstract class BaseTest {
 
     @BeforeMethod
     protected void beforeMethod(Method method) {
-        BaseUtils.logf("Run %s.%s", this.getClass().getName(), method.getName());
+        log.info(SEPARATOR_MARKER, "-------- End of Previous Run -------- \n");
+        log.info("RUN " + this.getClass().getName() + "." +  method.getName());
         try {
             if (!methodsOrder.isGroupStarted(method) || methodsOrder.isGroupFinished(method)) {
                 clearData();
@@ -56,22 +65,22 @@ public abstract class BaseTest {
     }
 
     protected void clearData() {
-        BaseUtils.log("Clear data");
+        log.info("CLEAR DATA");
         JenkinsUtils.clearData();
     }
 
     protected void loginWeb() {
-        BaseUtils.log("Login");
+        log.info("LOGIN");
         ProjectUtils.login(driver);
     }
 
     protected void getWeb() {
-        BaseUtils.log("Get web page");
+        log.info("GET WEB PAGE");
         ProjectUtils.get(driver);
     }
 
     protected void startDriver() {
-        BaseUtils.log("Browser open");
+        log.info("BROWSER OPEN");
         driver = BaseUtils.createDriver();
     }
 
@@ -88,7 +97,7 @@ public abstract class BaseTest {
         if (driver != null) {
             driver.quit();
             waitMap = new HashMap<>();
-            BaseUtils.log("Browser closed");
+            log.info("BROWSER CLOSED");
         }
     }
 
@@ -109,7 +118,7 @@ public abstract class BaseTest {
             stopDriver();
         }
 
-        BaseUtils.logf("Execution time is %o sec\n\n", (testResult.getEndMillis() - testResult.getStartMillis()) / 1000);
+        log.info("EXECUTION TIME IS " + String.valueOf((testResult.getEndMillis() - testResult.getStartMillis())) + " MS \n");
     }
 
     protected WebDriverWait getWait(int seconds) {

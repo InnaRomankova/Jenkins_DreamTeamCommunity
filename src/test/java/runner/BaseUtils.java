@@ -86,11 +86,6 @@ public final class BaseUtils {
         System.out.println(str);
     }
 
-    public static void logf(String str, Object... arr) {
-        System.out.printf(str, arr);
-        System.out.println();
-    }
-
     static void captureScreenFile(WebDriver driver, String methodName, String className) {
         TakesScreenshot ts = (TakesScreenshot) driver;
         Allure.getLifecycle().addAttachment(
