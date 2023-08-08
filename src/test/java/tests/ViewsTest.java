@@ -5,7 +5,6 @@ import model.page.HomePage;
 import model.page.view.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 import runner.BaseUtils;
@@ -18,7 +17,6 @@ import java.util.Map;
 
 import static runner.TestUtils.getRandomStr;
 
-@Ignore
 public class ViewsTest extends BaseTest {
 
     @Step("Creating All Six Item: Freestyle Project, Pipeline,Multi-configuration Project, Folder, Multibranch Pipeline," +
@@ -168,7 +166,7 @@ public class ViewsTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Function")
     @Description("Verify that added jobs to list view was removed and notification message was appeared")
-    @Test(dependsOnMethods = "testAddJobsToListView")
+    @Test(dependsOnMethods = {"testAddJobsToListView"})
     public void testDeselectJobsFromListView() {
         ViewPage viewPage = new HomePage(getDriver())
                 .getSideMenu()
@@ -402,7 +400,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertTrue(editGlobalViewPage.isFilterBuildExecutorsOptionCheckBoxSelected());
     }
 
-    @Test(dependsOnMethods = "testCreateListViewAndAddSixItems")
+    @Test(dependsOnMethods = {"testCreateListViewAndAddSixItems"})
     public void testListViewAddNewColumn() {
         String expectedResult = "Git Branches";
 
@@ -524,8 +522,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertTrue(newPaneIsDisplayed);
     }
 
-    @Ignore
-    @Test(dependsOnMethods = "testCreateListViewAndAddSixItems")
+    @Test(dependsOnMethods = {"testCreateListViewAndAddSixItems"})
     public void testListViewCheckEveryAddColumnItem() {
         List<Boolean> isMatchingMenuItemToAddedColumn = new ArrayList<>();
 
@@ -598,8 +595,7 @@ public class ViewsTest extends BaseTest {
                 new HomePage(getDriver()).getJobListAsString());
     }
 
-    @Ignore
-    @Test(dependsOnMethods = "testCreateListViewAndAddSixItems")
+    @Test(dependsOnMethods = {"testCreateListViewAndAddSixItems"})
     public void testDeleteStatusColumn() {
         boolean isContainingStatusColumn = new HomePage(getDriver())
                 .getSideMenu()
@@ -629,7 +625,6 @@ public class ViewsTest extends BaseTest {
         Assert.assertFalse(myViewsPage.getListViewsNames().contains(TestDataUtils.LIST_VIEW_NAME));
     }
 
-    @Ignore
     @Test
     public void testCreateNewListViewWithExistingJob() {
         final String projectOne = getRandomStr();
@@ -669,7 +664,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertEquals(actualDescription, descriptionRandom);
     }
 
-    @Test(dependsOnMethods = "testEditViewAddDescription")
+    @Test(dependsOnMethods = {"testCreateNewListViewWithExistingJob", "testEditViewAddDescription"})
     public void testEditViewDeleteDescription() {
         String descriptionText = new HomePage(getDriver())
                 .clickView(TestDataUtils.LIST_VIEW_NAME)
@@ -681,7 +676,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertEquals(descriptionText, "");
     }
 
-    @Test(dependsOnMethods = "testEditViewDeleteDescription")
+    @Test(dependsOnMethods = {"testCreateNewListViewWithExistingJob", "testEditViewAddDescription", "testEditViewDeleteDescription"})
     public void testRemoveSomeHeadersFromProjectStatusTableInListView() {
         final List<String> namesRemoveColumns = List.of("Weather", "Last Failure", "Last Duration");
 
@@ -701,7 +696,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertNotEquals(numberOfJobTableHeadersAll, numberOfJobTableHeadersListView);
     }
 
-    @Test(dependsOnMethods = "testRemoveSomeHeadersFromProjectStatusTableInListView")
+    @Test(dependsOnMethods = {"testCreateNewListViewWithExistingJob", "testEditViewAddDescription", "testEditViewDeleteDescription", "testRemoveSomeHeadersFromProjectStatusTableInListView"})
     public void testDeleteListView() {
         List<String> viewList = new HomePage(getDriver())
                 .clickView(TestDataUtils.LIST_VIEW_NAME)
