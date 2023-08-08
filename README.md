@@ -23,7 +23,7 @@ In the username and password fields enter the "admin" and password from the jenk
 ####
 * Generate local <b>allure report</b>: `mvn allure:serve`
 ####
-* Check the last allure report on CI: [Allure Report](https://redroverschool.github.io/JenkinsQA_05/index.html)
+* Check the last allure report on CI: [Allure Report](https://dreamteamcommunity.github.io/Jenkins/index.html)
 
 ---
 ![](https://img.shields.io/badge/java-version%2011-blue?style=flat-square)
