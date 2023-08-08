@@ -21,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@Listeners({FilterForTests.class, OrderForTests.class, ConfigurationForTests.class})
+@Listeners({FilterForTests.class, OrderForTests.class, ConfigurationForTests.class, ExceptionListener.class})
 public abstract class BaseTest {
 
     private WebDriver driver;
@@ -30,8 +30,6 @@ public abstract class BaseTest {
     private OrderUtils.MethodsOrder<Method> methodsOrder;
 
     protected static Logger log = LogManager.getLogger();
-
-    private static final Marker SEPARATOR_MARKER = MarkerManager.getMarker("SEPARATOR");
 
     @BeforeClass
     protected void beforeClass() {
@@ -45,7 +43,6 @@ public abstract class BaseTest {
 
     @BeforeMethod
     protected void beforeMethod(Method method) {
-        log.info(SEPARATOR_MARKER, "-------- End of Previous Run -------- \n");
         log.info("RUN " + this.getClass().getName() + "." +  method.getName());
         try {
             if (!methodsOrder.isGroupStarted(method) || methodsOrder.isGroupFinished(method)) {
@@ -118,7 +115,8 @@ public abstract class BaseTest {
             stopDriver();
         }
 
-        log.info("EXECUTION TIME IS " + String.valueOf((testResult.getEndMillis() - testResult.getStartMillis())) + " MS \n");
+        log.info("EXECUTION TIME IS " + String.valueOf((testResult.getEndMillis() - testResult.getStartMillis())) + " MS");
+        log.info( "-------- End of Previous Run -------- \n");
     }
 
     protected WebDriverWait getWait(int seconds) {
