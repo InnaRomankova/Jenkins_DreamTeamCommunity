@@ -122,7 +122,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Function")
     @Description("Verify that the multi-configuration project can be enabled to project configuration page")
-    @Test(dependsOnMethods = "testMultiConfigurationProjectDisable")
+    @Test(dependsOnMethods = {"testMultiConfigurationProjectDisable"})
     public void testMultiConfigurationProjectEnable() {
         MultiConfigurationProjectStatusPage multiConfigurationProjectStatusPage = new HomePage(getDriver())
                 .clickMultiConfigurationProject(TestDataUtils.MULTI_CONFIGURATION_PROJECT_NAME)

@@ -650,7 +650,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertTrue(new HomePage(getDriver()).getViewList().contains(TestDataUtils.LIST_VIEW_NAME));
     }
 
-    @Test(dependsOnMethods = "testCreateNewListViewWithExistingJob")
+    @Test(dependsOnMethods = {"testCreateNewListViewWithExistingJob"})
     public void testEditViewAddDescription() {
         final String descriptionRandom = getRandomStr();
 

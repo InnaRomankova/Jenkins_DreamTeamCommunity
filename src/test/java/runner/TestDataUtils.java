@@ -49,7 +49,7 @@ public class TestDataUtils {
     public static final String DESCRIPTION = getRandomStr();
     public static final String NEW_DESCRIPTION = "New description";
 
-    public static final String GITHUB_REPOSITORY_URL = "https://github.com/RedRoverSchool/JenkinsQA_05-test.git";
+    public static final String GITHUB_REPOSITORY_URL = "https://github.com/DreamTeamCommunity/AlgorithmsJavaDT.git";
 
     public static final String BRANCH_SPECIFIER = "*/main";
 

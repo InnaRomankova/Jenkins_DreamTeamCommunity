@@ -19,7 +19,6 @@ import java.util.*;
 
 import static runner.TestUtils.*;
 
-@Ignore
 public class FreestyleProjectTest extends BaseTest {
 
     @TmsLink("Vorq8fwS")
@@ -46,7 +45,7 @@ public class FreestyleProjectTest extends BaseTest {
     @Severity(SeverityLevel.NORMAL)
     @Feature("Function")
     @Description("Verify if the Project status icon displayed an expected status when 'Disable Project' option has been applied")
-    @Test(dependsOnMethods = "testDisableProject")
+    @Test(dependsOnMethods = {"testDisableProject"})
     public void testEnableProject() {
         final String jobStatusIconTooltip = new HomePage(getDriver())
                 .clickFreestyleProjectName(TestDataUtils.FREESTYLE_PROJECT_NAME)
@@ -98,7 +97,7 @@ public class FreestyleProjectTest extends BaseTest {
     @Severity(SeverityLevel.TRIVIAL)
     @Feature("UI")
     @Description("Verify if expected description of the project has been updated")
-    @Test(dependsOnMethods = "testAddDescription")
+    @Test(dependsOnMethods = {"testAddDescription"})
     public void testEditDescription() {
         final String newDescription = "It's new description to job";
 
@@ -320,7 +319,7 @@ public class FreestyleProjectTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Function")
     @Description("Verify if project sourced by GitHub successfully built")
-    @Test(dependsOnMethods = "testConfigureJobAsParameterized")
+    @Test(dependsOnMethods = {"testConfigureJobAsParameterized"})
     public void testConfigureSourceCodeByGIT() {
 
         HomePage page = new HomePage(getDriver())
@@ -511,13 +510,14 @@ public class FreestyleProjectTest extends BaseTest {
         Assert.assertEquals(project2StatusIconAfterBuild, "Success");
     }
 
+    @Ignore
     @TmsLink("76Qyfari")
     @Owner("Liudmila Plucci")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Function")
     @Description("Verify if 'target' folder disappears from the 'Workspace' page when Build Steps goal: 'clean' is set. " +
             "Thus confirming that 'clean' command is succeed. Project sourced from GitHub using Maven.")
-    @Test(dependsOnMethods = "testBuildGitProjectWithBuildStepsMaven")
+    @Test(dependsOnMethods = {"testBuildGitProjectWithBuildStepsMaven"})
     public void testBuildGitProjectWithBuildStepsMavenClean() {
         final String goal = "clean";
 
@@ -549,7 +549,7 @@ public class FreestyleProjectTest extends BaseTest {
     @Feature("Function")
     @Description("Check the downstream project section and list of connected projects appear " +
             "on the StatusPage of the Upstream project")
-    @Test(dependsOnMethods = "testBuildProjectWithBuildOtherProjectOption")
+    @Test(dependsOnMethods = {"testBuildProjectWithBuildOtherProjectOption"})
     public void testDownstreamProjectSectionAndListOfConnectedProjectsAppearsOnUpstreamProjectStatusPage() {
 
         List<String> h2HeaderNamesList = new HomePage(getDriver())
@@ -569,7 +569,7 @@ public class FreestyleProjectTest extends BaseTest {
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Function")
     @Description("Check if the Downstream project name link on the Status page leads to the correct Upstream project Status Page")
-    @Test(dependsOnMethods = "testBuildProjectWithBuildOtherProjectOption")
+    @Test(dependsOnMethods = {"testBuildProjectWithBuildOtherProjectOption"})
     public void testDownstreamProjectNameLeadsToCorrectUpstreamProjectStatusPage() {
 
         String downstreamProjectName = new HomePage(getDriver())
