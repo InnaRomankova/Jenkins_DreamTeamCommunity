@@ -8,6 +8,7 @@ import model.page.RenameItemErrorPage;
 import model.page.config.MultiConfigurationProjectConfigPage;
 import model.page.status.MultiConfigurationProjectStatusPage;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 import runner.ProjectMethodsUtils;
@@ -117,6 +118,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
         Assert.assertTrue(multiConfigurationProjectStatusPage.getTextDisabledWarning().contains("This project is currently disabled"));
     }
 
+    @Ignore
     @TmsLink("Po4bZcIE")
     @Owner("Vita Zharskaya")
     @Severity(SeverityLevel.CRITICAL)

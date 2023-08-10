@@ -66,6 +66,7 @@ public class HomeSideMenuComponent extends BaseSideMenuComponent {
 
     @Step("Click on 'Manage Jenkins' link on the side menu")
     public ManageJenkinsPage clickManageJenkins() {
+        getWait(5).until(ExpectedConditions.elementToBeClickable(manageJenkins));
         manageJenkins.click();
 
         return new ManageJenkinsPage(getDriver());

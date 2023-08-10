@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import runner.TestUtils;
@@ -124,6 +125,12 @@ public class FreestyleProjectConfigPage extends BaseConfigPage<FreestyleProjectS
 
     @FindBy(name = "_.healthScaleFactor")
     private WebElement healthReportAmplificationFactorField;
+
+    @FindBy(xpath = "//a[text()='Editable Email Notification']")
+    private WebElement editableEmailNotificationType;
+
+    @FindBy(xpath = "//textarea[@name='project_recipient_list']")
+    private WebElement projectRecipientListInputField;
 
     @Override
     protected FreestyleProjectStatusPage createStatusPage() {
@@ -440,6 +447,20 @@ public class FreestyleProjectConfigPage extends BaseConfigPage<FreestyleProjectS
         scrollToElement(getDriver(), healthReportAmplificationFactorField);
         getWait(5).until(TestUtils.ExpectedConditions.elementIsNotMoving(healthReportAmplificationFactorField));
         healthReportAmplificationFactorField.clear();
+
+        return this;
+    }
+
+    public FreestyleProjectConfigPage selectEditableEmailNotification() {
+        getWait(2).until(ExpectedConditions.elementToBeClickable(editableEmailNotificationType)).click();
+
+        return this;
+    }
+
+    public FreestyleProjectConfigPage inputEmailIntoProjectRecipientListInputField(String email) {
+        new Actions(getDriver()).moveToElement(projectRecipientListInputField);
+        getWait(2).until(ExpectedConditions.elementToBeClickable(projectRecipientListInputField)).clear();
+        projectRecipientListInputField.sendKeys(email);
 
         return this;
     }

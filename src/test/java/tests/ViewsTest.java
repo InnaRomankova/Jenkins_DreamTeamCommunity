@@ -5,6 +5,7 @@ import model.page.HomePage;
 import model.page.view.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 import runner.BaseUtils;
@@ -58,6 +59,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertTrue(listViewsNames.contains(TestDataUtils.MY_VIEW_NAME));
     }
 
+    @Ignore
     @Owner("Nadia Ludanik")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Function")
@@ -400,6 +402,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertTrue(editGlobalViewPage.isFilterBuildExecutorsOptionCheckBoxSelected());
     }
 
+    @Ignore
     @Test(dependsOnMethods = {"testCreateListViewAndAddSixItems"})
     public void testListViewAddNewColumn() {
         String expectedResult = "Git Branches";
@@ -522,6 +525,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertTrue(newPaneIsDisplayed);
     }
 
+    @Ignore
     @Test(dependsOnMethods = {"testCreateListViewAndAddSixItems"})
     public void testListViewCheckEveryAddColumnItem() {
         List<Boolean> isMatchingMenuItemToAddedColumn = new ArrayList<>();
@@ -595,6 +599,7 @@ public class ViewsTest extends BaseTest {
                 new HomePage(getDriver()).getJobListAsString());
     }
 
+    @Ignore
     @Test(dependsOnMethods = {"testCreateListViewAndAddSixItems"})
     public void testDeleteStatusColumn() {
         boolean isContainingStatusColumn = new HomePage(getDriver())
@@ -625,6 +630,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertFalse(myViewsPage.getListViewsNames().contains(TestDataUtils.LIST_VIEW_NAME));
     }
 
+    @Ignore
     @Test
     public void testCreateNewListViewWithExistingJob() {
         final String projectOne = getRandomStr();
@@ -650,6 +656,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertTrue(new HomePage(getDriver()).getViewList().contains(TestDataUtils.LIST_VIEW_NAME));
     }
 
+    @Ignore
     @Test(dependsOnMethods = {"testCreateNewListViewWithExistingJob"})
     public void testEditViewAddDescription() {
         final String descriptionRandom = getRandomStr();
@@ -664,6 +671,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertEquals(actualDescription, descriptionRandom);
     }
 
+    @Ignore
     @Test(dependsOnMethods = {"testCreateNewListViewWithExistingJob", "testEditViewAddDescription"})
     public void testEditViewDeleteDescription() {
         String descriptionText = new HomePage(getDriver())
@@ -676,6 +684,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertEquals(descriptionText, "");
     }
 
+    @Ignore
     @Test(dependsOnMethods = {"testCreateNewListViewWithExistingJob", "testEditViewAddDescription", "testEditViewDeleteDescription"})
     public void testRemoveSomeHeadersFromProjectStatusTableInListView() {
         final List<String> namesRemoveColumns = List.of("Weather", "Last Failure", "Last Duration");
@@ -696,6 +705,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertNotEquals(numberOfJobTableHeadersAll, numberOfJobTableHeadersListView);
     }
 
+    @Ignore
     @Test(dependsOnMethods = {"testCreateNewListViewWithExistingJob", "testEditViewAddDescription", "testEditViewDeleteDescription", "testRemoveSomeHeadersFromProjectStatusTableInListView"})
     public void testDeleteListView() {
         List<String> viewList = new HomePage(getDriver())

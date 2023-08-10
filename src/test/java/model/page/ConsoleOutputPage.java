@@ -18,6 +18,9 @@ public class ConsoleOutputPage extends MainBasePage {
     @FindBy(xpath = "//span/span/*[name()='svg' and (@tooltip != 'In progress')]")
     private WebElement buildStatusIcon;
 
+    @FindBy(xpath = "//a[@class='build-status-link']")
+    private WebElement buildIconStatus;
+
     public ConsoleOutputPage(WebDriver driver) {
         super(driver);
     }
@@ -31,5 +34,12 @@ public class ConsoleOutputPage extends MainBasePage {
 
     public String getTextConsoleOutputUserName() {
         return consoleOutputUserName.getText();
+    }
+
+    public ConsoleOutputPage clickBuildIconStatus() {
+        getWait(5).until(ExpectedConditions.visibilityOf(buildIconStatus));
+        getWait(5).until(ExpectedConditions.elementToBeClickable(buildIconStatus)).click();
+
+        return new ConsoleOutputPage(getDriver());
     }
 }

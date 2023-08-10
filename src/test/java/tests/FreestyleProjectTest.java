@@ -1,10 +1,7 @@
 package tests;
 
 import io.qameta.allure.*;
-import model.page.BuildWithParametersPage;
-import model.page.ChangesBuildsPage;
-import model.page.HomePage;
-import model.page.RenameItemErrorPage;
+import model.page.*;
 import model.page.config.FreestyleProjectConfigPage;
 import model.page.status.FreestyleProjectStatusPage;
 import org.testng.Assert;
@@ -648,5 +645,35 @@ public class FreestyleProjectTest extends BaseTest {
         Assert.assertTrue(freestyleProjectStatusPage.isTestResultLinkDisplayed());
         Assert.assertEquals(freestyleProjectStatusPage.getTestResultLinkText(), expectedLinkName);
         Assert.assertTrue(freestyleProjectStatusPage.isTestResultHistoryChartDisplayed());
+    }
+
+    @Test
+    public void testConfigurePostBuildActionEditableEmailNotification() {
+        String username = "jenkins05test@gmail.com";
+        String expectedConsoleOutputText = "Sending email to: jenkins05test@gmail.com";
+
+        ProjectMethodsUtils.manageJenkinsEmailNotificationSetUp(getDriver());
+        ProjectMethodsUtils.createNewFreestyleProject(getDriver(), TestDataUtils.FREESTYLE_PROJECT_NAME);
+
+        String emailSentLog = new HomePage(getDriver())
+                .clickFreestyleProjectName(TestDataUtils.FREESTYLE_PROJECT_NAME)
+                .getSideMenu()
+                .clickConfigure()
+                .openAddPostBuildActionDropDown()
+                .selectEditableEmailNotification()
+                .inputEmailIntoProjectRecipientListInputField(username)
+                .clickSaveButton()
+                .getSideMenu()
+                .clickBuildNowAndWaitBuildCompleted1()
+                .clickBuildIconStatus()
+                .getConsoleOutputText();
+
+        Assert.assertTrue(emailSentLog.contains(expectedConsoleOutputText), "Error: Email report wasn't sent");
+
+        new ConsoleOutputPage(getDriver())
+                .getBreadcrumbs()
+                .clickDashboard();
+
+        ProjectMethodsUtils.manageJenkinsEmailNotificationGoingBackToOriginalSettings(getDriver());
     }
 }

@@ -59,6 +59,9 @@ public class FreestyleProjectStatusSideMenuComponent extends BaseStatusSideMenuC
     @FindBy(xpath = "//a[@class='model-link inside build-link display-name']")
     private List<WebElement> listOfBuildNames;
 
+    @FindBy(xpath = "//a[@tooltip='Success > Console Output']")
+    private WebElement buildIconStatus;
+
     @Override
     public FreestyleProjectConfigPage getConfigPage() {
         return new FreestyleProjectConfigPage(getDriver());
@@ -129,6 +132,15 @@ public class FreestyleProjectStatusSideMenuComponent extends BaseStatusSideMenuC
                 (buildStatusIcon, "tooltip", "progress"))));
 
         return new FreestyleProjectStatusPage(getDriver());
+    }
+
+    @Step("Click 'Build Now' on the side menu and wait for all builds with any result are completed")
+    public ConsoleOutputPage clickBuildNowAndWaitBuildCompleted1() {
+        buildNow.click();
+        getWait(60).until((ExpectedConditions.not(ExpectedConditions.attributeContains
+                (buildStatusIcon, "tooltip", "progress"))));
+
+        return new ConsoleOutputPage(getDriver());
     }
 
     public BreadcrumbsComponent getBreadcrumbs() {

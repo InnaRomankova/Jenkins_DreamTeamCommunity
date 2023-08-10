@@ -207,4 +207,50 @@ public class ProjectMethodsUtils {
                 .clickConfigureTools()
                 .deleteAllMavenInstallations();
     }
+
+    public static void manageJenkinsEmailNotificationSetUp(WebDriver driver) {
+        new HomePage(driver)
+                .getSideMenu()
+                .clickManageJenkins()
+                .clickConfigureSystem()
+                .inputSmtpServerFieldExtendedEmailNotifications("smtp.gmail.com")
+                .inputSmtpPortFieldExtendedEmailNotifications("465")
+                .clickAdvancedButtonExtendedEmailNotification()
+                .clickAddCredentialButton()
+                .inputUsernameIntoAddCredentialPopUpWindow("jenkins05test@gmail.com")
+                .inputPasswordIntoAddCredentialPopUpWindow("bfdzlscazepasstj")
+                .clickAddButtonAddCredentialPopUp()
+                .selectCreatedCredentials("jenkins05test@gmail.com")
+                .checkUseSSLCheckbox()
+                .clickDefaultTriggersButton()
+                .checkAlwaysDefaultTriggers()
+                .checkSuccessDefaultTriggers()
+                .inputSmtpServerFieldEmailNotifications("smtp.gmail.com")
+                .clickAdvancedButtonEmailNotification()
+                .clickUseSMTPAuthenticationCheckbox()
+                .inputUserNameAndPasswordSMTPAuthentication("jenkins05test@gmail.com", "bfdzlscazepasstj")
+                .checkUseSSLCheckboxEmailNotifications()
+                .inputSmtpPortEmailNotificationsField("465")
+                .clickSaveButton();
+    }
+
+    public static void manageJenkinsEmailNotificationGoingBackToOriginalSettings(WebDriver driver) {
+        new HomePage(driver)
+                .getSideMenu()
+                .clickManageJenkins()
+                .clickConfigureSystem()
+                .inputSmtpServerFieldExtendedEmailNotifications("")
+                .inputSmtpPortFieldExtendedEmailNotifications("25")
+                .clickAdvancedButtonExtendedEmailNotification()
+                .unCheckUseSSLCheckboxExtendedEmailNotifications()
+                .clickDefaultTriggersButton()
+                .unCheckDefaultTriggerAlwaysCheckbox()
+                .unCheckDefaultTriggerSuccessCheckbox()
+                .inputSmtpServerFieldEmailNotifications("")
+                .clickAdvancedButtonEmailNotification()
+                .unCheckSMTPAuthenticationCheckbox()
+                .unCheckUseSSLCheckboxEmailNotifications()
+                .inputSmtpPortEmailNotificationsField("25")
+                .clickSaveButton();
+    }
 }
