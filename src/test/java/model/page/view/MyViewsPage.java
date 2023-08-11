@@ -89,7 +89,8 @@ public class MyViewsPage extends MainBasePage {
 
     @Step("Click on the viewName '{viewName}'")
     public ViewPage clickView(String viewName) {
-        getDriver().findElement(By.cssSelector(".tabBar .tab a[href*='/my-views/view/" + viewName + "/']")).click();
+        getWait(5).until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector(".tabBar .tab a[href*='/my-views/view/" + viewName + "/']"))).click();
 
         return new ViewPage(getDriver());
     }
