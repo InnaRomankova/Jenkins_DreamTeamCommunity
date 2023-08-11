@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class HomeSideMenuComponent extends BaseSideMenuComponent {
 
-    @FindBy(linkText = "New Item")
+    @FindBy(xpath = "//a[contains(@href,'newJob')]")
     private WebElement newItem;
 
     @FindBy(xpath = "//span/a[@href='/asynchPeople/']")
@@ -45,7 +45,7 @@ public class HomeSideMenuComponent extends BaseSideMenuComponent {
 
     @Step("Click 'New Item' on the Side Menu")
     public NewItemPage<?> clickNewItem() {
-        newItem.click();
+        getWait(5).until(ExpectedConditions.elementToBeClickable(newItem)).click();
 
         return new NewItemPage<>(getDriver(), null);
     }
