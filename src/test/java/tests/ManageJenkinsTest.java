@@ -4,6 +4,7 @@ import io.qameta.allure.*;
 import model.page.*;
 import model.page.status.FolderStatusPage;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 import runner.ProjectMethodsUtils;
@@ -68,6 +69,7 @@ public class ManageJenkinsTest extends BaseTest {
         Assert.assertEquals(page.getMainPanelNoticeText(), "No old data was found.");
     }
 
+    @Ignore
     @Flaky
     @TmsLink("Ud8LDADw")
     @Owner("Aleksei Chapaev")

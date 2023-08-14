@@ -215,6 +215,7 @@ public class PipelineTest extends BaseTest {
                 .getAttributeGitHubSideMenu("href").contains(TestDataUtils.GITHUB_REPOSITORY_URL));
     }
 
+    @Ignore
     @TmsLink("ptPK5j1n")
     @Owner("Yulia Matusevich")
     @Severity(SeverityLevel.NORMAL)

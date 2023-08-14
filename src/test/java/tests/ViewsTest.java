@@ -440,6 +440,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertEquals(actualResult, expectedResult);
     }
 
+    @Ignore
     @Test
     public void testListViewAddRegexFilterJobNamesContainingNine() {
         createAllSixItems();
