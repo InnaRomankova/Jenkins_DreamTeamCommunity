@@ -1,6 +1,5 @@
 package tests;
 
-import com.sun.source.tree.AssertTree;
 import io.qameta.allure.*;
 import model.component.HeaderComponent;
 import model.page.*;

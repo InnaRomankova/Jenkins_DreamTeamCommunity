@@ -7,7 +7,9 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestContext;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.annotations.*;
 import runner.order.OrderForTests;
 import runner.order.OrderUtils;
@@ -39,8 +41,14 @@ public abstract class BaseTest {
                 m -> m.getAnnotation(Test.class).dependsOnMethods());
     }
 
+    @BeforeSuite
+    protected void beforeSuite(ITestContext context) {
+        log.info(ReportUtils.getReportHeader(context));
+    }
+
     @BeforeMethod
     protected void beforeMethod(Method method) {
+        Reporter.log("TEST RUN", true);
         log.info("RUN " + this.getClass().getName() + "." +  method.getName());
         try {
             if (!methodsOrder.isGroupStarted(method) || methodsOrder.isGroupFinished(method)) {
@@ -113,8 +121,7 @@ public abstract class BaseTest {
             stopDriver();
         }
 
-        log.info("EXECUTION TIME IS " + String.valueOf((testResult.getEndMillis() - testResult.getStartMillis())) + " MS");
-        log.info( "-------- End of Previous Run -------- \n");
+        log.info(ReportUtils.getTestStatistics(method, testResult));
     }
 
     protected WebDriverWait getWait(int seconds) {
