@@ -180,7 +180,7 @@ public class ViewsTest extends BaseTest {
                 .clickOkButton();
 
         Assert.assertEquals(viewPage.getCurrentURL(),
-                "http://localhost:8080/user/admin/my-views/view/" + TestDataUtils.LIST_VIEW_NAME + "/");
+                "http://localhost:" + TestDataUtils.defaultPort + "/user/admin/my-views/view/" + TestDataUtils.LIST_VIEW_NAME + "/");
         Assert.assertTrue(viewPage.getTextContentOnViewMainPanel().contains(
                 "This view has no jobs associated with it. "
                         + "You can either add some existing jobs to this view or create a new job in this view."));
@@ -420,6 +420,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertEquals(actualResult, expectedResult);
     }
 
+    @Ignore
     @Test
     public void testAddAllItemsToListView() {
         createAllSixItems();

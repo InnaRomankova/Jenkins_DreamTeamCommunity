@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 import runner.BaseTest;
 import runner.ProjectMethodsUtils;
 import runner.TestDataUtils;
-import runner.TestUtils;
 import java.util.List;
 import static runner.ProjectMethodsUtils.createNewFolder;
 import static runner.TestUtils.getRandomStr;
@@ -496,7 +495,7 @@ public class NewItemTest extends BaseTest {
 
         CreateItemErrorPage createItemErrorPage = newItemPage.clickOkToCreateItemErrorPage();
 
-        Assert.assertEquals(createItemErrorPage.getCurrentURL(), "http://localhost:8080/view/all/createItem");
+        Assert.assertEquals(createItemErrorPage.getCurrentURL(), "http://localhost:" + TestDataUtils.defaultPort + "/view/all/createItem");
         Assert.assertEquals(createItemErrorPage.getErrorHeader(),
                 "Error");
         Assert.assertEquals(createItemErrorPage.getErrorMessage(), "‘@’ is an unsafe character");

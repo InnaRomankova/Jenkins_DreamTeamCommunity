@@ -7,6 +7,7 @@ import model.page.view.MyViewsPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import runner.BaseTest;
+import runner.TestDataUtils;
 
 import java.util.List;
 
@@ -104,12 +105,12 @@ public class HeaderComponentTest extends BaseTest {
                 .getSideMenu()
                 .clickManageJenkins();
 
-        Assert.assertEquals(manageJenkinsPage.getCurrentURL(), "http://localhost:8080/manage/");
+        Assert.assertEquals(manageJenkinsPage.getCurrentURL(), "http://localhost:" + TestDataUtils.defaultPort + "/manage/");
         Assert.assertEquals(manageJenkinsPage.getTextHeader1ManageJenkins(), "Manage Jenkins");
 
         HomePage homePage = manageJenkinsPage.getHeader().clickJenkinsNameIcon();
 
-        Assert.assertEquals(homePage.getCurrentURL(), "http://localhost:8080/");
+        Assert.assertEquals(homePage.getCurrentURL(), "http://localhost:" + TestDataUtils.defaultPort + "/");
         Assert.assertEquals(homePage.getHeaderText(), "Welcome to Jenkins!");
     }
 
@@ -175,7 +176,7 @@ public class HeaderComponentTest extends BaseTest {
                 .clickJenkinsNameIcon()
                 .getCurrentURL();
 
-        Assert.assertEquals(actualURL, "http://localhost:8080/");
+        Assert.assertEquals(actualURL, "http://localhost:" + TestDataUtils.defaultPort + "/");
     }
 
     @Owner("Nadia Ludanik")
