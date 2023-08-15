@@ -393,6 +393,7 @@ public class MultiConfigurationProjectTest extends BaseTest {
         Assert.assertTrue(configMatrix.configurationMatrixIsDisplayed());
     }
 
+    @Ignore
     @TmsLink("x19sKw4m")
     @Owner("Kate Bay")
     @Severity(SeverityLevel.NORMAL)

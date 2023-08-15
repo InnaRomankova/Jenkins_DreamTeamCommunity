@@ -1,5 +1,6 @@
 package runner;
 
+import com.google.common.collect.ImmutableMap;
 import io.qameta.allure.Allure;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +21,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
 @Listeners({FilterForTests.class, OrderForTests.class, ExceptionListener.class})
 public abstract class BaseTest {
@@ -44,6 +47,15 @@ public abstract class BaseTest {
     @BeforeSuite
     protected void beforeSuite(ITestContext context) {
         log.info(ReportUtils.getReportHeader(context));
+        allureEnvironmentWriter(
+                ImmutableMap.<String, String>builder()
+                        .put("OS", System.getProperty("os.name"))
+                        .put("OS.version", System.getProperty("os.version"))
+                        .put("Browser", "Chrome")
+                        .put("Browser.version", "115.0.5790.171")
+                        .put("Java.version", System.getProperty("java.version"))
+                        .put("Maven.version", "Apache Maven 3.9.0")
+                        .build());
     }
 
     @BeforeMethod

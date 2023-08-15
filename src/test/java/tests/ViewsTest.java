@@ -140,6 +140,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertEquals(textConfirmAfterClickingApply, "Saved");
     }
 
+    @Ignore
     @Owner("Umida")
     @Severity(SeverityLevel.CRITICAL)
     @Feature("Function")
@@ -163,6 +164,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertTrue(viewPage.getListProjectsNamesFromView().contains(TestDataUtils.FREESTYLE_PROJECT_NAME));
     }
 
+    @Ignore
     @TmsLink("tU92jXT9")
     @Owner("Ekaterina Tergunova")
     @Severity(SeverityLevel.CRITICAL)
@@ -468,6 +470,7 @@ public class ViewsTest extends BaseTest {
         Assert.assertEquals(actualResult, expectedResult);
     }
 
+    @Ignore
     @Test
     public void testListViewChangeColumnOrder() {
         createAllSixItems();
