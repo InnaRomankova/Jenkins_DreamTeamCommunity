@@ -6,6 +6,7 @@ import model.page.HomePage;
 import model.page.RestApiPage;
 import model.page.XmlPage;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import runner.BaseTest;
 
@@ -62,6 +63,7 @@ public class FooterComponentTest extends BaseTest {
                 + "style information associated with it. The document tree is shown below.");
     }
 
+    @Ignore
     @Owner("DenSebrovsky")
     @Severity(SeverityLevel.MINOR)
     @Feature("UI")

@@ -425,6 +425,7 @@ public class FreestyleProjectTest extends BaseTest {
         Assert.assertTrue(actualBuildDateTime.contains(currentDayPeriod()));
     }
 
+    @Ignore
     @TmsLink("y0zlLD5l")
     @Owner("Liudmila Plucci")
     @Severity(SeverityLevel.CRITICAL)

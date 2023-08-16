@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
@@ -47,15 +48,6 @@ public abstract class BaseTest {
     @BeforeSuite
     protected void beforeSuite(ITestContext context) {
         log.info(ReportUtils.getReportHeader(context));
-        allureEnvironmentWriter(
-                ImmutableMap.<String, String>builder()
-                        .put("OS", System.getProperty("os.name"))
-                        .put("OS.version", System.getProperty("os.version"))
-                        .put("Browser", "Chrome")
-                        .put("Browser.version", "115.0.5790.171")
-                        .put("Java.version", System.getProperty("java.version"))
-                        .put("Maven.version", "Apache Maven 3.9.0")
-                        .build());
     }
 
     @BeforeMethod
@@ -142,5 +134,18 @@ public abstract class BaseTest {
 
     protected WebDriver getDriver() {
         return driver;
+    }
+
+    @AfterSuite
+    protected void afterSuite(ITestContext context) {
+        allureEnvironmentWriter(
+                ImmutableMap.<String, String>builder()
+                        .put("OS", System.getProperty("os.name"))
+                        .put("OS.version", System.getProperty("os.version"))
+                        .put("Browser", ((RemoteWebDriver) driver).getCapabilities().getBrowserName())
+                        .put("Browser.version", ((RemoteWebDriver) driver).getCapabilities().getBrowserVersion())
+                        .put("Java.version", System.getProperty("java.version"))
+                        .put("Maven.version", "Apache Maven 3.9.0")
+                        .build());
     }
 }
