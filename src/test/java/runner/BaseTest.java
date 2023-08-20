@@ -145,7 +145,7 @@ public abstract class BaseTest {
                         .put("Browser", ((RemoteWebDriver) driver).getCapabilities().getBrowserName())
                         .put("Browser.version", ((RemoteWebDriver) driver).getCapabilities().getBrowserVersion())
                         .put("Java.version", System.getProperty("java.version"))
-                        .put("Maven.version", "Apache Maven 3.9.0")
+                        .put("Maven.version", System.getenv("MVN_VER"))
                         .build());
     }
 }
